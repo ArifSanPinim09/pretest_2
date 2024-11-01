@@ -96,7 +96,7 @@ class LoginView extends GetView<LoginController> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed('/reset-password'),
                 child: const Text(
                   "Forgot the password?",
                   style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pretest_2/app/data/service/auth_service.dart';
 import 'firebase_options.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Get.put(AuthService());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

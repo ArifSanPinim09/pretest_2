@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import '../controllers/register_controller.dart';
-import '../../widget/button_widget.dart';
-import '../../widget/text_formfield_widget.dart';
+import 'package:pretest_2/app/modules/widget/button_widget.dart';
+import 'package:pretest_2/app/modules/widget/text_formfield_widget.dart';
 
-class RegisterView extends GetView<RegisterController> {
-  RegisterView({super.key});
+import '../controllers/login_controller.dart';
 
-  final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+class LoginView extends GetView<LoginController> {
+  LoginView({super.key});
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +28,7 @@ class RegisterView extends GetView<RegisterController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Register",
+                "Login",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 40.0,
@@ -38,32 +37,20 @@ class RegisterView extends GetView<RegisterController> {
               ),
               const SizedBox(height: 8.0),
               const Text(
-                "Welcome new user.",
+                "Welcome back",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.0,
                 ),
               ),
               const Text(
-                "Please create your account here",
+                "Please login to your account",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.0,
                 ),
               ),
-              const SizedBox(height: 40.0),
-              TextFormfieldWidget(
-                controller: _usernameController,
-                hintText: "Username",
-                isPassword: false,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter username';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 50.0),
               TextFormfieldWidget(
                 controller: _emailController,
                 hintText: "Email",
@@ -93,39 +80,35 @@ class RegisterView extends GetView<RegisterController> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16.0),
-              TextFormfieldWidget(
-                controller: _confirmPasswordController,
-                hintText: "Confirm Password",
-                isPassword: true,
-                validator: (value) {
-                  if (value != _passwordController.text) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
-              ),
               const SizedBox(height: 40.0),
               Obx(
                 () => ButtonWidget(
-                  title: "Register",
                   isLoading: controller.isLoading.value,
+                  title: "Login",
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      controller.register(
+                      controller.login(
                         email: _emailController.text,
                         password: _passwordController.text,
-                        username: _usernameController.text,
                       );
                     }
                   },
                 ),
               ),
-              const SizedBox(height: 100.0),
               TextButton(
-                onPressed: () => Get.offAllNamed('/login'),
+                onPressed: () {},
                 child: const Text(
-                  'Already have an account? Login',
+                  "Forgot the password?",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 200.0),
+              TextButton(
+                onPressed: () => Get.toNamed('/register'),
+                child: const Text(
+                  'Don' 't have an account? Register',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
